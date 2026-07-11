@@ -65,12 +65,19 @@ class _CanvasState extends ConsumerState<Canvas> {
         child: SizedBox(
           width: double.infinity,
           height: double.infinity,
-          child: CustomPaint(
-            painter: CanvasPainter(points: currentPoints, previousPoints: previousPoints),
-            child: Image.asset(
-              'assets/images/notebook_green_bg.jpg'
-            ),
-          ),
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: Image.asset(
+                  'assets/images/notebook_green_bg.jpg',
+                  fit: BoxFit.fill,
+                )
+              ),
+              CustomPaint(
+                painter: CanvasPainter(points: currentPoints, previousPoints: previousPoints),
+              )
+            ],
+          )
         ),
       )
       

@@ -27,7 +27,18 @@ class CanvasPainter extends CustomPainter {
 
   void _drawStroke(List<PointVector> points, Paint paint, Canvas canvas) {
     if(points.isEmpty)return;
-    final strokes = getStroke(points);
+    final strokes = getStroke(
+      points,
+      options: StrokeOptions(
+        size: 10,
+        thinning: 0.6,
+        smoothing: 0.55,
+        streamline: 0.5,
+        simulatePressure: true,
+        start: StrokeEndOptions.start(taperEnabled: true, customTaper: 0, cap: true),
+        end: StrokeEndOptions.end(taperEnabled: true, customTaper: 0, cap: true),
+      ),
+    );
     final path = Path();
     path.moveTo(strokes[0].dx, strokes[0].dy);
     for(int i=1;i<strokes.length;i++){
